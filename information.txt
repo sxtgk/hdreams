@@ -1,0 +1,32 @@
+hello guys! my name is: s2jkz or sxtgk :) 
+today i will publish my setup for creating an audio spectrum in the after effects program!
+thanks for your support all this time, it was fun ;) peace to all!
+
+my youtube {
+    url: "https://www.youtube.com/c/S2JKZ": s2jkz;
+    url: "https://www.youtube.com/channel/UCOehKe-9hOex65NYFmEa1yg": sxtgk;
+}
+
+hds { - background for config
+    background {
+        • hds;
+        • logo;
+    },
+    effects { - my config and how to set it up
+        • audio spectrum.aep;
+        • alt+time-vary.png;
+        • spiral+slider.png;
+        • linear.png;
+        • config.css;
+    },
+    music { - link to the song and its author
+        • url: "https://soundcloud.com/sxmpra/something-somewhere";
+        • song name: something, somewhere (Prod. SXMPRA);
+    },
+    install { - instructions for installing the song if it is not in the archive
+        • 1.png; 
+        • 2.png;
+        • 3.png;
+        • install.css;
+    }
+}

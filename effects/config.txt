@@ -1,0 +1,184 @@
+/* audio spectrum: after effects */
+
+new composition: "render" {
+    width: 1920;
+    height: 836;
+    frame rate: 30;
+    time media: "depends on the song" (duration);
+    allowable: 0; 02; 03; 00;
+    color: black;
+}
+
+new composition: "audio" {
+    width: 1920;
+    height: 836;
+    frame rate: 30;
+    time media: "depends on the song" (duration);
+    allowable: 0; 02; 03; 00;
+    color: black;
+}
+
+/* audio tab */
+
+audio tab {
+    time lines [
+        background;
+        bass;
+        snow;
+        kits;
+        song;
+    ]
+}
+
+Effects & Presents {
+    audio spectrum;
+    polar cordinates;
+    mirror;
+    glow;
+    cc particle world;
+    fill;
+}
+
+audio spectrum {
+    audio layer: song;
+    start point: 0, 418;
+    end point: 961, 418;
+    start frequency: 20;
+    end frequency: 85;
+    frequency bands: 2000;
+    maximum height: 500;
+    audio duration: 280;
+    audio offset: -20;
+    thickness: 5;
+    softness: 50;
+    inside color: #?;
+    outside color: #?;
+    side options: side b;
+}
+
+polar cordinates {
+    interpolation: 100;
+    type of conversion: rect to polar;
+}
+
+mirror {
+    reflection center: 959, 418;
+    reflection angle: 0;
+}
+
+glow {
+    glow threshold: 30;
+    glow radius: 150;
+    glow intensity: 15;
+}
+
+/* copy bass spectrum */
+
+ctrl + d: bass {
+    rename: {
+        bass ~ kits
+    },
+}
+
+kits spectrum {
+    audio layer: song;
+    start point: 0, 418;
+    end point: 961, 418;
+    start frequency: 20;
+    end frequency: 85;
+    frequency bands: 150;
+    maximum height: 350;
+    audio duration: 150;
+    audio offset: -20;
+    thickness: 3.50;
+    softness: 50;
+}
+
+/* add snow */
+
+cc particle world {
+    grid & guides: all 0 [x];
+    producer: all 0;
+    longevity: 5 (sec);
+    physics: animation (fractal omni);
+    gravity: 0;
+    extra angle: 0;
+    particle {
+        particle type: (lens convex);
+        birth size: 0,03;
+        death size: 0,03;
+        max opacity: 100;
+    },
+    extras {
+        effects camera {
+            rotation Y: {
+                alt + click: "time-vary Y" [
+                    value + (comp("render").layer("Audio Amplitude").effect("Both Channels")("Slider")) / 10;
+                ]
+            },
+            rotation Z: {
+                alt + click: "time-vary Y" [
+                    value + (comp("render").layer("Audio Amplitude").effect("Both Channels")("Slider")) / 30;
+                ]
+            },
+        },
+    },
+}
+
+fill {
+    color: white;
+}
+
+/* render tab */
+
+render tab {
+    time lines [
+        audio amplitude;
+        audio;
+        song;
+        background;
+    ]
+}
+
+audio amplitude {
+    effects {
+        left channel: deleted;
+        right channel: deleted;
+        both channel {
+            slider: 0.35;
+        },
+    },
+}
+
+audio {
+    transform {
+        scale: 118, 118;
+    },
+    alt + click: "time-vary - scale";
+    [temp, temp] (spiral + slider[aa]) {
+        audio amplitude {
+            effects {
+              both channel {
+                (spiral + slider)
+              },  
+            },
+        },
+    },
+}
+
+audio amplitude {
+    effects {
+        both channel {
+            alt + click: "time-vary slider";
+            linear(value, ?, ?, 92, 100);
+        },
+    },
+}
+
+/* graph editor */
+
+high frequencies {
+    allowable: 92-20 & 30 = 72 & 62
+}
+
+linear(value, 72, 92, 92, 100) or linear(value, 62, 92, 92, 100);

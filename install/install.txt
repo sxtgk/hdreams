@@ -1,0 +1,3 @@
+double click on a song, 
+a window will open through which you can search for the downloaded song and import it :)
+p/s i can't upload the song with the config, because i need permission for this case...
